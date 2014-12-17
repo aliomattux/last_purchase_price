@@ -6,17 +6,30 @@ class StockPicking(osv.osv):
 	'purchase': fields.many2one('purchase.order', 'Purchase Order'),
     }
 
-    def action_invoice_create(self, cr, uid, ids, journal_id, group=False, \
-        type='out_invoice', context=None
-        ):
 
-        invoices = super(StockPicking, self).action_invoice_create(cr, uid, ids, journal_id, \
-                group=False, type='out_invoice', context=None
-        )
+    def _get_invoice_vals(self, cr, uid, key, inv_type, journal_id, move, context=None):
+	invoice_vals = super(StockPicking, self)._get_invoice_vals(cr, uid, key, inv_type, journal_id, \
+		move, context=context
+	)
 
-        print 'INVOICES', invoices
+	if move.picking_id.purchase:
+	    invoice_vals.update({'purchase_order': move.picking_id.purchase.id})
 
-        return invoices
+	return invoice_vals
+
+
+    #Nothing done here yet.
+#    def action_invoice_create(self, cr, uid, ids, journal_id, group=False, \
+#        type='out_invoice', context=None
+#        ):
+
+#        invoices = super(StockPicking, self).action_invoice_create(cr, uid, ids, journal_id, \
+ #               group=False, type='out_invoice', context=None
+  #      )
+
+
+   #     return invoices
+
 
 ####  Customer wants to update purchase price from supplier invoice not receipt.
 ####  If you want to update based on purchase line when receive, uncomment code below
