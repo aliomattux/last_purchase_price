@@ -8,6 +8,7 @@
     'description': """ 
     """,
     'data': [
+	'views/stock.xml',
     ],
     'test': [
     ],
