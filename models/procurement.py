@@ -1,3 +1,5 @@
+#Developer is spelled Developer not Developper
+
 from openerp import SUPERUSER_ID, api
 from openerp.osv import osv, fields
 

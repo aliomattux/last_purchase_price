@@ -12,8 +12,12 @@ class StockPicking(osv.osv):
 		move, context=context
 	)
 
+	#add the purchase name into the origin so it can be searched for in invoices
 	if move.picking_id.purchase:
-	    invoice_vals.update({'purchase_order': move.picking_id.purchase.id})
+            origin = move.picking_id.purchase.name + '/' + move.picking_id.name
+	    invoice_vals.update({'purchase_order': move.picking_id.purchase.id,
+				 'origin': origin
+	    })
 
 	return invoice_vals
 
