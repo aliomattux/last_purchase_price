@@ -9,6 +9,7 @@
     """,
     'data': [
 	'views/stock.xml',
+	'views/account_invoice.xml',
     ],
     'test': [
     ],
